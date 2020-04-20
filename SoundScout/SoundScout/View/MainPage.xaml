@@ -8,8 +8,8 @@
              Title ="Main Page">
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="The app defaults to this page upon login"
+        <StackLayout Margin="16, 0">
+            <Label Text="The app defaults to this page upon verifying that a user is logged in"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
