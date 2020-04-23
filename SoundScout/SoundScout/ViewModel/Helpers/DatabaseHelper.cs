@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Profile.Model;
+using SoundScout.Model;
 using Xamarin.Forms;
 
 namespace SoundScout.ViewModel.Helpers
