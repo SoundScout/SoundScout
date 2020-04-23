@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Profile.ViewModel;
-using Profile.ViewModel.Helpers;
+using SoundScout.ViewModel;
+using SoundScout.ViewModel.Helpers;
 using Xamarin.Forms;
 
 namespace SoundScout.View
