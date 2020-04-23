@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoundScout.View.Matching"
+             Title="Matching">
+    <ContentPage.Content>
+        <ListView
+                  x:Name="objects"
+                  ItemsSource="{Binding Matches}"
+                  HasUnevenRows="True"
+                  BackgroundColor="Azure"
+                  SeparatorVisibility="Default"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                  ItemSelected="Messaging">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="6,4,6,4"
+                                     BackgroundColor="AntiqueWhite">
+                                    <Label
+                                            Text="{Binding mySoundScore, StringFormat='Matches Below. My SoundScore: {0}'}"
+                                            HorizontalTextAlignment="Center"
+                                            FontAttributes="Bold"
+                                            Margin="8"
+                                            FontSize="Large">
+                                    </Label>
+                                     <Label Text="{Binding soundScore, StringFormat='SoundScore: {0}'}"
+                                            Margin="8"
+                                            FontAttributes="Bold"
+                                            FontSize="Large" >
+                                     </Label>
+                                    <Label Text= "{Binding genres, StringFormat='Favorite Genres: {0}'}"
+                                           x:Name="genre"
+                                           Margin="8"
+                                           FontSize="Large">                                   
+                                    </Label>
+                                    <Label Text="Select To Message This Profile"
+                                           Margin="8"
+                                           FontSize="Medium">
+                                    </Label>
+                            </StackLayout>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,6 +6,7 @@ namespace SoundScout.View
     {
         private String username;
         private String phoneNumber;
+        public Messaging() { }
         public Messaging(String username, String phoneNumber)
         {
             this.username = username;
@@ -22,6 +23,7 @@ namespace SoundScout.View
         // sends sms message to matches user using their phone number
         public async void SendMsg()
         {
+            Console.WriteLine("Messaging made it");
             String msgText = defaultMessage();
             String number = getPhoneNumber();
             try
@@ -31,11 +33,11 @@ namespace SoundScout.View
             }
             catch (FeatureNotSupportedException ex)
             {
-                await App.Current.MainPage.DisplayAlert("Messaging Error", "Sms Messaging is Not Supported on Your Device", "OK");
+            //    await App.Current.MainPage.DisplayAlert("Messaging Error", "Sms Messaging is Not Supported on Your Device", "OK");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Unknown Error", "Restart and Try Again", "OK");
+           //     await App.Current.MainPage.DisplayAlert("Unknown Error", "Restart and Try Again", "OK");
 
             }
         }
