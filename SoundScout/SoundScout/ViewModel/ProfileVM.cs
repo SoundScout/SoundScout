@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
-using Profile.Model;
-using Profile.ViewModel.Helpers;
+using SoundScout.Model;
+using SoundScout.ViewModel.Helpers;
 
 namespace SoundScout.ViewModel
 {
