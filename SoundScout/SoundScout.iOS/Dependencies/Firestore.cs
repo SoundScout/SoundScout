@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Foundation;
-using Profile.Model;
-using Profile.ViewModel.Helpers;
+using SoundScout.Model;
+using SoundScout.ViewModel.Helpers;
 using UIKit;
 using Xamarin.Forms;
 
