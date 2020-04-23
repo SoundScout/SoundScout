@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:SoundScout.ViewModel"
              x:Class="SoundScout.View.ProfilePage"
-             Title="Profile"
+             Title="Profile" >
              
     <ContentPage.Resources>
         <ResourceDictionary>
