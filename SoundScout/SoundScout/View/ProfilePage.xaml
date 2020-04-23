@@ -1,16 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xlmns="http://xamarin.com/schemas/2014/forms"
              xlmns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Profile.ViewModel"
+             xmlns:vm="clr-namespace:SoundScout.ViewModel"
              mc:Ignorable="d"
              x:Class="Profile.View.ProfilePage"
              Title="Profile"
     <ContentPage.Resources>
         <ResourceDictionary>
-        <vm:ProfileVM x:Key="vm"/>
-    </ResourceDictionary>
+          <vm:ProfileVM x:Key="vm"/>
+        </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
@@ -19,7 +19,9 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding Source={Static Resource vm}, Path=ProfileInformation}">
+        <ListView BindingContext={StaticResource vm}"
+                  ItemsSource="{Binding users}"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}">                             
             <StackLayout BackgroundColor="AliceBlue">
                 <BoxView HeightRequest="15" />
                 <Label Text="{Binding Name}"
@@ -29,7 +31,7 @@
                        HorizontalOptions="Center" Margin="0" Padding="0"
                        BorderColor="Black" IsClippedToBounds="True" >
                     <!-- Place Photo Here -->
-                    <Image Source="https://i5.walmartimages.com/asr/681f347f-3b7f-48df-a01b-c39daaf27af7_1.986b0aef04edb36d528fd74f9a4577ab.jpeg?odnWidth=450&odnHeight=450&odnBg=ffffff"
+                    <Image Source=""
                        HeightRequest="250"
                        HorizontalOptions="Center"
                        VerticalOptions="Start"
