@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              x:Class="Profile.View.ProfilePage"
              Title="Profile"
+             
     <ContentPage.Resources>
         <ResourceDictionary>
           <vm:ProfileVM x:Key="vm"/>
