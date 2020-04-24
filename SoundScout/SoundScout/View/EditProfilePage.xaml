@@ -13,10 +13,10 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit"
+        <ToolbarItem Text="Profile"
                      BindingContext="{StaticResource vm}"
                      Command="{Binding UpdateCommand"}
-                     CommandParameter"{Binding Name}"
+                     CommandParameter="{Binding Name}"
                      />
     </ContentPage.ToolbarItems>
     
