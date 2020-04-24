@@ -9,12 +9,13 @@ namespace SoundScout.Model
         public string Age { get; set; }
         public string Location { get; set; }
         public string Genre { get; set; }
-
         public string PhoneNumber { get; set; }
+        public String Email { get; set; }
+        public String Password { get; set; }
+        public String Uid { get; set; )
 
         public User()
         {
-
         }
     }
 }
