@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Firebase.Auth;
 using Foundation;
 using SoundScout.ViewModel.Helpers;
 using UIKit;
@@ -49,6 +50,22 @@ namespace SoundScout.iOS.Dependencies
         public bool IsAuthenticated()
         {
             return Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid != null;
+        }
+
+        public async Task<bool> LoginWithFacebook(string accessToken)
+        {
+
+            try
+            {
+                AuthCredential credential = FacebookAuthProvider.GetCredential(accessToken);
+                await Firebase.Auth.Auth.DefaultInstance.SignInWithCredentialAsync(credential);
+            }
+            catch (Exception)
+            {
+                throw new Exception("An unknown error occurred, please try again");
+            }
+
+            return false;
         }
 
         public async Task<bool> RegisterUser(string name, string email, string password)
