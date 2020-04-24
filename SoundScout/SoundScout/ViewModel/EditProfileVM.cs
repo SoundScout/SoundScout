@@ -18,24 +18,6 @@ namespace SoundScout.ViewModel
         private string favoriteGenre;
         private string phoneNumber;
 
-        public User User
-        {
-            get
-            {
-                return user;
-            }
-            set
-            {
-                user = value;
-                Name = user.Name;
-                age = user.Age;
-                location = user.Location;
-                favoriteGenre = user.Genre;
-                phoneNumber = user.PhoneNumber;
-                OnPropertyChanged("User");
-            }
-        }
-        
         public string Name
         {
             get
@@ -45,9 +27,7 @@ namespace SoundScout.ViewModel
             set
             {
                 name = value;
-                User.Name = name;
                 OnPropertyChanged("Name");
-                OnPropertyChanged("User");
             }
         }
 
@@ -60,9 +40,7 @@ namespace SoundScout.ViewModel
             set
             {
                 age = value;
-                User.Age = age;
                 OnPropertyChanged("Age");
-                OnPropertyChanged("User");
             }
         }
 
@@ -75,9 +53,7 @@ namespace SoundScout.ViewModel
             set
             {
                 location = value;
-                User.Location = location;
                 OnPropertyChanged("Location");
-                OnPropertyChanged("User");
             }
         }
 
@@ -90,9 +66,7 @@ namespace SoundScout.ViewModel
             set
             {
                 favoriteGenre = value;
-                User.Genre = favoriteGenre;
                 OnPropertyChanged("Genre");
-                OnPropertyChanged("User");
             }
         }
 
@@ -105,9 +79,7 @@ namespace SoundScout.ViewModel
             set
             {
                 phoneNumber = value;
-                User.PhoneNumber = phoneNumber;
                 OnPropertyChanged("Phone Number");
-                OnPropertyChanged("User");
             }
         }
 
@@ -126,7 +98,14 @@ namespace SoundScout.ViewModel
         
         private async void UpdateProfile(object obj)
         {
-            bool result = await DatabaseHelper.UpdateUser(User);
+            bool result = await DatabaseHelper.UpdateUser(new Model.User
+            {
+               Name = Name,
+               Age = Age,
+               Location = Location,
+               Genre = Genre, 
+               PhoneNumber = PhoneNumber 
+            });
             if (result) {
                 await App.Current.MainPage.Navigation.PopAsync();
             }
