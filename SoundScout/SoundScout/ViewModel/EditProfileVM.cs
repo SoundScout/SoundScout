@@ -13,7 +13,7 @@ namespace SoundScout.ViewModel
     {
         private User user;
         private string name;
-        private int age;
+        private string age;
         private string location;
         private string favoriteGenre;
         private string phoneNumber;
@@ -51,7 +51,7 @@ namespace SoundScout.ViewModel
             }
         }
 
-        public int Age
+        public string Age
         {
             get
             {
@@ -112,8 +112,6 @@ namespace SoundScout.ViewModel
         }
 
         public ICommand UpdateCommand { get; set; }
-        
-
         public event PropertyChangedEventHandler PropertyChanged;
         
         public EditProfileVM()
