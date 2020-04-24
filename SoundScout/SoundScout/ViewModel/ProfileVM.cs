@@ -16,7 +16,7 @@ namespace SoundScout.ViewModel
             ProfileInformation = new ObservableCollection<string>();
         }
         
-        public async bool ReadInformation()
+        public async Task<bool> ReadInformation()
         {
             var information = await DatabaseHelper.ReadInformation();
             ProfileInformation.Clear();
