@@ -9,7 +9,6 @@ namespace SoundScout.ViewModel
 {
     public class ProfileVM
     {
-        User user = firebase.auth().currentUser;
         public ObservableCollection<string> ProfileInformation { get; set; }
         
         public ProfileVM()
@@ -17,19 +16,17 @@ namespace SoundScout.ViewModel
             ProfileInformation = new ObservableCollection<string>();
         }
         
-        public async bool ReadInformation(User user)
+        public async bool ReadInformation()
         {
-            if(user != null)
+            var information = await DatabaseHelper.ReadInformation();
+            ProfileInformation.Clear();
+            foreach(string i in information)
             {
-                var information = await DatabaseHelper.ReadInformation(user);
-                ProfileInformation.Clear();
-                foreach(string i in information)
-                {
-                    ProfileInformation.Add(i);
-                }
-                return true;
+                ProfileInformation.Add(i);
             }
-            else { return false };
+            return true;
+        }
+        else { return false };
         }
     }
 }
