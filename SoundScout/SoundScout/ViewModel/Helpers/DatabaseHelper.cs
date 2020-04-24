@@ -13,7 +13,7 @@ namespace SoundScout.ViewModel.Helpers
         bool InsertUser(User user);
         Task<bool> DeleteUser(User user);
         Task<bool> UpdateUser(User user);
-        Task<bool> ReadInformation(User user);
+        Task<bool> ReadInformation();
     }
 
     public class DatabaseHelper
@@ -28,9 +28,9 @@ namespace SoundScout.ViewModel.Helpers
         {
             return firestore.InsertUser(user);
         }
-        public static Task<bool> ReadInformation(User user)
+        public static Task<bool> ReadInformation()
         {
-            return firestore.ReadInformation(user);
+            return firestore.ReadInformation();
         }
         public static Task<bool> UpdateUser(User user)
         {
