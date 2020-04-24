@@ -13,12 +13,12 @@ namespace SoundScout.Droid.Dependencies
 {
     public class Firestore : Java.Lang.Object, IFirestore, IOnCompleteListener
     {
-        List<User> information;
+        List<string> information;
         bool hasReadInformation = false;
 
         public Firestore()
         {
-            information = new List<User>();
+            information = new List<string>();
         }
 
         public async Task<bool> DeleteUser(User user)
@@ -26,7 +26,7 @@ namespace SoundScout.Droid.Dependencies
             try
             {
                 var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("users");
-                collection.Document(user.UserId).Delete();
+                collection.Document(user.Uid).Delete();
                 return true;
             }
             catch (Exception ex)
@@ -42,12 +42,14 @@ namespace SoundScout.Droid.Dependencies
                 var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("users");
                 var userDocument = new Dictionary<string, Java.Lang.Object>
             {
-                {"author", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid },
                 {"name", user.Name },
                 {"age", user.Age },
                 {"location", user.Location },
-                {"genre", user.Genre },
-                {"phonenumber", user.PhoneNumber }
+                {"favoriteGenre", user.Genre },
+                {"phoneNumber", user.PhoneNumber },
+                {"email", user.Email },
+                {"password", user.Password },
+                {"uid", user.Uid }
             };
                 collection.Add(userDocument);
                 return true;
@@ -59,13 +61,13 @@ namespace SoundScout.Droid.Dependencies
             
         }
 
-        public async Task<IList<User>> ReadInformation()
+        public async Task<bool> ReadInformation()
         {
             hasReadInformation = false;
             var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("users");
-            var query = collection.WhereEqualTo("author", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid);
+            var query = collection.WhereEqualTo("uid", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid);
             query.Get().AddOnCompleteListener(this);
-
+            
             for(int i = 0; i < 25; i++)
             {
                 await System.Threading.Tasks.Task.Delay(100);
@@ -104,7 +106,10 @@ namespace SoundScout.Droid.Dependencies
                         Age = doc.Get("age").ToString(),
                         Location = doc.Get("location").ToString(),
                         Genre = doc.Get("favoriteGenre").ToString(),
-                        PhoneNumber = doc.Get("phonenumber").ToString()
+                        PhoneNumber = doc.Get("phoneNumber").ToString(),
+                        Email = doc.Get("email").ToString(),
+                        Password = doc.Get("password").ToString(),
+                        Uid = doc.Get("uid").ToString()
                     };
                     information.Add(user);
                 }
