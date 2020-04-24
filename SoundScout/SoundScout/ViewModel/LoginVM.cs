@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -76,6 +77,7 @@ namespace SoundScout.ViewModel
 
         public ICommand LoginCommand { get; set; }
         public ICommand RegisterCommand { get; set; }
+        public ICommand FBLoginCommand { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -84,6 +86,7 @@ namespace SoundScout.ViewModel
 
             LoginCommand = new Command(Login, LoginCanExecute);
             RegisterCommand = new Command(Register, RegisterCanExecute);
+            FBLoginCommand = new Command(FBLogin);
 
 
         }
@@ -111,6 +114,22 @@ namespace SoundScout.ViewModel
             bool result = await Auth.AuthenticateUser(Email, Password);
             if (result)
                 await App.Current.MainPage.Navigation.PopAsync();
+        }
+
+        private /*async*/ void FBLogin(object parameter)
+        {
+            Debug.Write("FBLoginSuccessfull");
+
+            string accessToken;
+
+            string apiRequest = "https://www.facebook.com/v6.0/dialog/oauth?lient_id=879456162545528&redirect_uri=https://www.facebook.com/connect/login_success.html&response_type=token&display=popup";
+
+            //get accessToken here by accessing the link stored in apiRequest and extracting the access token from the redirected url
+
+            //bool result = await Auth.LoginWithFacebook(accessToken);
+
+            //if (result)
+                //await App.Current.MainPage.Navigation.PopAsync();
         }
 
         private bool LoginCanExecute(object parameter)

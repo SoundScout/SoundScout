@@ -11,6 +11,7 @@ namespace SoundScout.ViewModel.Helpers
     {
         Task<bool> RegisterUser(string name, string email, string password);
         Task<bool> AuthenticateUser(string email, string password);
+        Task<bool> LoginWithFacebook(string accessToken);
         bool IsAuthenticated();
         string GetCurrentUserId();
 
@@ -48,6 +49,19 @@ namespace SoundScout.ViewModel.Helpers
                 return false;
             }
             
+        }
+
+        public async Task<bool> LoginWithFacebook(string accessToken)
+        {
+            try
+            {
+                return await auth.LoginWithFacebook(accessToken);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+                return false;
+            }
         }
 
         public static bool IsAuthenticated()
