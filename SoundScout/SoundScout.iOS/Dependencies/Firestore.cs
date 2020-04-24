@@ -70,7 +70,7 @@ namespace SoundScout.iOS.Dependencies
             }
         }
 
-        public async bool ReadInformation()
+        public async Task<bool> ReadInformation()
         {
             try
             {
@@ -113,7 +113,7 @@ namespace SoundScout.iOS.Dependencies
                     new NSString("age"),
                     new NSString("location"),
                     new NSString("genre"),
-                    new NSString("phonenumber")
+                    new NSString("phonenumber"),
                     new NSString("email"),
                     new NSString("password"),
                     new NSString("uid")
@@ -124,7 +124,7 @@ namespace SoundScout.iOS.Dependencies
                     new NSNumber(user.Age),
                     new NSString(user.Location),
                     new NSString(user.Genre),
-                    new NSString(user.PhoneNumber)
+                    new NSString(user.PhoneNumber),
                     new NSString(user.Email),
                     new NSString(user.Password),
                     new NSString(user.Uid)
