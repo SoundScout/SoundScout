@@ -38,25 +38,30 @@ namespace SoundScout.iOS.Dependencies
             {
                 var keys = new[]
             {
-                new NSString("author"),
                 new NSString("name"),
                 new NSString("age"),
                 new NSString("location"),
-                new NSString("genre"),
-                new NSString("phonenumber"),
+                new NSString("favoriteGenre"),
+                new NSString("phoneNumber"),
+                new NSString("email"),
+                new NSString("password"),
+                new NSString("uid")
             };
                 var values = new NSObject[]
                 {
-                new NSString(Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid),
                 new NSString(user.Name),
-                new NSNumber(user.Age),
+                new NSString(user.Age),
                 new NSString(user.Location),
                 new NSString(user.Genre),
                 new NSString(user.PhoneNumber),
+                new NSString(user.Email),
+                new NSString(user.Password),
+                new NSString(user.Uid)
                 };
 
                 var userDocument = new NSDictionary<NSString, NSObject>(keys, values);
                 firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("users").AddDocument(userDocument);
+                
                 return true;
             }
             catch(Exception ex)
@@ -65,26 +70,28 @@ namespace SoundScout.iOS.Dependencies
             }
         }
 
-        public async Task<IList<User>> ReadInformation()
+        public async Task<bool> ReadInformation()
         {
             try
             {
                 var information = Firebase.CloudFirestore.Firestore.SharedInstance.GetCollection("users");
-                var query = information.WhereEqualsTo("author", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid);
+                var query = information.WhereEqualsTo("uid", Firebase.Auth.Auth.DefaultInstance.CurrentUser.Uid);
                 var documents = await query.GetDocumentsAsync();
 
-                List<User> data = new List<User>();
+                List<string> data = new List<string>();
                 foreach (var doc in documents.Documents)
                 {
                     var userData = doc.Data;
                     var info = new User
                     {
-                        UserId = userData.ValueForKey(new NSString("author")) as NSString,
                         Name = userData.ValueForKey(new NSString("name")) as NSString,
                         Age = userData.ValueForKey(new NSString("age")) as NSString,
                         Location = userData.ValueForKey(new NSString("location")) as NSString,
-                        Genre = userData.ValueForKey(new NSString("genre")) as NSString,
-                        PhoneNumber = userData.ValueForKey(new NSString("phonenumber")) as NSString,
+                        Genre = userData.ValueForKey(new NSString("favoriteGenre")) as NSString,
+                        PhoneNumber = userData.ValueForKey(new NSString("phoneNumber")) as NSString,
+                        Email = userData.ValueForKey(new NSString("email")) as NSString,
+                        Password = userData.ValueForKey(new NSString("password")) as NSString,
+                        Uid = userData.ValueForKey(new NSString("uid")) as NSString,
                     };
                     data.Add(info);
                 }; 
@@ -92,7 +99,7 @@ namespace SoundScout.iOS.Dependencies
             }
             catch(Exception ex)
             {
-                return new List<User>();
+                return new List<string>();
             }
         }
 
@@ -105,8 +112,11 @@ namespace SoundScout.iOS.Dependencies
                     new NSString("name"),
                     new NSString("age"),
                     new NSString("location"),
-                    new NSString("genre"),
-                    new NSString("phonenumber")
+                    new NSString("favoriteGenre"),
+                    new NSString("phoneNumber"),
+                    new NSString("email"),
+                    new NSString("password"),
+                    new NSString("uid")
                 };
                 var values = new NSObject[]
                 {
@@ -114,11 +124,14 @@ namespace SoundScout.iOS.Dependencies
                     new NSNumber(user.Age),
                     new NSString(user.Location),
                     new NSString(user.Genre),
-                    new NSString(user.PhoneNumber)
+                    new NSString(user.PhoneNumber),
+                    new NSString(user.Email),
+                    new NSString(user.Password),
+                    new NSString(user.Uid)
                 };
                 var userDocument = new NSDictionary<NSObject, NSObject>(keys, values);
                 var collection = Firebase.CloudFirestore.SharedInstance.GetCollection("users");
-                await collection.GetDocument.(user.UserId).UpdateDataAsync(userDocument);
+                await collection.GetDocument(user.Uid).UpdateDataAsync(userDocument);
                 return true;
             }
             catch(Exception ex)

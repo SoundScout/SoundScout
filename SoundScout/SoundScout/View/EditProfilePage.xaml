@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:SoundScout.ViewModel"
-             x:Class="SoundScout.View.NewUserPage"
+             x:Class="SoundScout.View.EditProfilePage"
              Title="User Information">
   
     <ContentPage.Resources>
@@ -13,9 +13,10 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Save"
-                     Command="{Binding Source={StaticResource vm}, Path=SaveProfileCommand}"
-                     CommandParameter="{Binding Source={StaticResource vm}, Path=Name}"
+        <ToolbarItem Text="Profile"
+                     BindingContext="{StaticResource vm}"
+                     Command="{Binding UpdateCommand"}
+                     CommandParameter="{Binding Name}"
                      />
     </ContentPage.ToolbarItems>
     
@@ -32,8 +33,6 @@
                    Text="{Binding Genre, Mode=TwoWay}"/>
             <Entry Placeholder="Phone Number"/>
                    Text="{Binding PhoneNumber, Mode=TwoWay}"/>
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="FillAndExpand"
-            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -60,6 +60,22 @@ namespace SoundScout.Droid.Dependencies
             return Firebase.Auth.FirebaseAuth.Instance.CurrentUser != null;
         }
 
+        public async Task<bool> LoginWithFacebook(string accessToken)
+        {
+
+            try
+            {
+                AuthCredential credential = FacebookAuthProvider.GetCredential(accessToken);
+                await Firebase.Auth.FirebaseAuth.Instance.SignInWithCredentialAsync(credential);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An unknown error occurred, please try again");
+            }
+
+            return false;
+        }
+
         public async Task<bool> RegisterUser(string name, string email, string password)
         {
             try

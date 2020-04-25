@@ -1,33 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Windows.Input;
+using SoundScout.Model;
+using SoundScout.ViewModel.Helpers;
 using Xamarin.Forms;
 
-namespace SoundScout.ViewModel.Helpers
+namespace SoundScout.ViewModel
 {
     public class EditProfileVM : INotifyPropertyChanged
     {
-        private string userID;
+        private User user;
         private string name;
-        private int age;
+        private string age;
         private string location;
         private string favoriteGenre;
         private string phoneNumber;
 
-        public string UserID
-        {
-            get
-            {
-                return userID;
-            }
-            set
-            {
-                userID = value;
-                OnPropertyChanged("UserID");
-            }
-        }
         public string Name
         {
             get
@@ -41,7 +31,7 @@ namespace SoundScout.ViewModel.Helpers
             }
         }
 
-        public int Age
+        public string Age
         {
             get
             {
@@ -93,38 +83,37 @@ namespace SoundScout.ViewModel.Helpers
             }
         }
 
-        public ICommand SaveProfileCommand { get; set; }
-
+        public ICommand UpdateCommand { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        
         public EditProfileVM()
         {
-            SaveProfileCommand = new Command(SaveProfile, SaveProfileCanExecute);
+            UpdateCommand = new Command(Update, UpdateCanExecute);
         }
 
-        private bool SaveProfileCanExecute(object obj)
+        private bool UpdateCanExecute(object obj)
         {
             return !string.IsNullOrEmpty(Name);
         }
-        private void SaveProfile(object obj)
+        
+        private async void UpdateProfile(object obj)
         {
-            bool result = DatabaseHelper.InsertUser(new Model.User
+            bool result = await DatabaseHelper.UpdateUser(new Model.User
             {
-                UserId = Auth.GetCurrentUserId(),
-                Name = name,
-                Age = age,
-                Location = location,
-                Genre = favoriteGenre,
-                PhoneNumber = phoneNumber
+               Name = Name,
+               Age = Age,
+               Location = Location,
+               Genre = Genre, 
+               PhoneNumber = PhoneNumber 
             });
-            if(result)
-            {
-                App.Current.MainPage.Navigation.PopAsync();
+            if (result) {
+                await App.Current.MainPage.Navigation.PopAsync();
             }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", "Something went wrong.", "Okay");
+            else {
+                await App.Current.MainPage.DisplayAlert("Error!", "There was an error, please try again", "Okay");
             }
         }
+        
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
